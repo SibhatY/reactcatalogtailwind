@@ -11,7 +11,7 @@ export const Products = [
       "price": 109.95,
       "description": "He is considered to be the Greatest Player of All Time by many. Collect his card today!",
       "category": "Basketball",
-      "image": {lebron},
+      "image": lebron,
       "rating": { "rate": 3.9, "count": 120 }
     },
     {
@@ -20,7 +20,7 @@ export const Products = [
       "price": 22.3,
       "description": "He is a young star player on the Mavs that will continue to dominate the NBA for awhile. Collect his card today!",
       "category": "Basketball",
-      "image": {luka},
+      "image": luka,
       "rating": { "rate": 4.1, "count": 259 }
     },
     {
@@ -29,7 +29,7 @@ export const Products = [
       "price": 55.99,
       "description": "He is considered to be the one of the greatest shooters of all time in NBA history. Collect his card today!",
       "category": "Basketball",
-      "image": {curry},
+      "image": curry,
       "rating": { "rate": 4.7, "count": 500 }
     },
     {
@@ -38,7 +38,7 @@ export const Products = [
       "price": 15.99,
       "description": "Jalen Hurts is the starting quarterback for the Philadelphia Eagles and led them to Superbowl 57. Collect his card today!",
       "category": "Football",
-      "image": {hurts},
+      "image": hurts,
       "rating": { "rate": 2.1, "count": 430 }
     },
     {
@@ -47,7 +47,7 @@ export const Products = [
       "price": 695,
       "description": "Patrick Mahomes is the starting quarterback for the Kansas City Chiefs and led his team to a Superbowl 57 victory. Collect his card today!",
       "category": "Football",
-      "image": {mahomes},
+      "image": mahomes,
       "rating": { "rate": 4.6, "count": 400 }
     },
     {
@@ -56,7 +56,7 @@ export const Products = [
       "price": 168,
       "description": "Justin Jefferson a starting wide reciever for the Minnesota Vikings. He is a young talent. Collect his card today!",
       "category": "Football",
-      "image": {jefferson},
+      "image": jefferson,
       "rating": { "rate": 3.9, "count": 70 }
     }
   ]

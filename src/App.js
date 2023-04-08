@@ -53,20 +53,26 @@ export const App = () => {
   function handleClick(tag){
     console.log("Step 4 : in handleClick", tag);
     let filtered = Products.filter(cat => cat.category === tag);
-    setProductsCategory(filtered);
+
+    if (tag === "All") {
+      setProductsCategory(Products)
+    }
+    else {
+      setProductsCategory(filtered);
+    }
+    
    // ProductsCategory = filtered;
    console.log("Step 5 : ", Products.length, ProductsCategory.length);
   }
   
   const handleChange = (e) => {
     setQuery(e.target.value);
-    console.log("Step 6 : in handleChange, Target Value :",e.target.value,"  Query Value :",query);
-    const results = ProductsCategory.filter(eachProduct => {
-    if (e.target.value === "") return ProductsCategory;
-      return eachProduct.title.toLowerCase().includes(e.target.value.toLowerCase())
+    const results = Products.filter(eachProduct => {
+      if (e.target.value === "") return true;
+      return eachProduct.title.toLowerCase().includes(e.target.value.toLowerCase());
     });
     setProductsCategory(results);
-  }
+  };
   
   return (
     <div className="flex fixed flex-row">

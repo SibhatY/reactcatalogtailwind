@@ -74,9 +74,9 @@ export const App = () => {
       <div className="h-screen  bg-slate-800 p-3 xl:basis-1/5" style={{ minWidth: '65%' }}>
         <img className="w-full" src={logo} alt="Sunset in the mountains" />
         <div className="px-6 py-4">
-          <h1 className="text-3xl mb-2 font-bold text-white"> Product Catalog App </h1>
+          <h1 className="text-3xl mb-2 font-bold text-white"> Sports Cards </h1>
           <p className="text-gray-700 text-white">
-            by - <b style={{ color: 'orange' }}>Design Shubham, Development Abraham</b>
+            by - <b style={{ color: 'orange' }}>placement holder</b>
           </p>
           <div className="py-10">
             { (Categories) ? <p className='text-white'>Tags : </p> : ''}

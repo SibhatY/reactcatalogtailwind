@@ -5,6 +5,7 @@ import {Products} from "./Products"
 import {Categories} from "./Categories"
 
 
+
 export const App = () => {
   console.log("Step 1: After reading file :");
   
@@ -25,8 +26,8 @@ export const App = () => {
           <div key={index} className="group relative shadow-lg" >
             <div className=" min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-60 lg:aspect-none">
               <img
-                alt="Product Image"
-                src={product.image}
+                alt = "player"
+                src= {product.image}
                 className="w-full h-full object-center object-cover lg:w-full lg:h-full"
               />
             </div>
@@ -53,20 +54,25 @@ export const App = () => {
   function handleClick(tag){
     console.log("Step 4 : in handleClick", tag);
     let filtered = Products.filter(cat => cat.category === tag);
-    setProductsCategory(filtered);
-   // ProductsCategory = filtered;
-   console.log("Step 5 : ", Products.length, ProductsCategory.length);
+    if(tag === "All"){
+      setProductsCategory(Products);
+    }
+    else{
+      setProductsCategory(filtered);
+    // ProductsCategory = filtered;
+    console.log("Step 5 : ", Products.length, ProductsCategory.length);
+    }
   }
+
   
   const handleChange = (e) => {
     setQuery(e.target.value);
-    console.log("Step 6 : in handleChange, Target Value :",e.target.value,"  Query Value :",query);
-    const results = ProductsCategory.filter(eachProduct => {
-    if (e.target.value === "") return ProductsCategory;
-      return eachProduct.title.toLowerCase().includes(e.target.value.toLowerCase())
+    const results = Products.filter(eachProduct => {
+      if (e.target.value === "") return true;
+      return eachProduct.title.toLowerCase().includes(e.target.value.toLowerCase());
     });
     setProductsCategory(results);
-  }
+  };
   
   return (
     <div className="flex fixed flex-row">
@@ -76,7 +82,7 @@ export const App = () => {
         <div className="px-6 py-4">
           <h1 className="text-3xl mb-2 font-bold text-white"> Sports Cards </h1>
           <p className="text-gray-700 text-white">
-            by - <b style={{ color: 'orange' }}>placement holder</b>
+            by - <b style={{ color: 'orange' }}>Yaaseen and Sibhat</b>
           </p>
           <div className="py-10">
             { (Categories) ? <p className='text-white'>Tags : </p> : ''}

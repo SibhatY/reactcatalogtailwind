@@ -1,75 +1,82 @@
 import "./App.css";
 import logo from "./logo.png";
-import React, {useState} from "react";
-import {Products} from "./Products"
-import {Categories} from "./Categories"
-
-
+import React, { useState } from "react";
+import { Products } from "./Products";
+import { Categories } from "./Categories";
+import { useEffect } from "react";
 
 export const App = () => {
-  console.log("Step 1: After reading file :");
-  
   const [ProductsCategory, setProductsCategory] = useState(Products);
-  const [query, setQuery] = useState('');
-  // var ProductsCategory = Products;
-
+  const [query, setQuery] = useState("");
 
   const render_products = (ProductsCategory) => {
+    return (
+      <div className="category-section fixed">
+        <h2 className="text-3xl font-extrabold tracking-tight text-gray-600 category-title">
+          Products ({ProductsCategory.length})
+        </h2>
 
-    return <div className='category-section fixed'>
-	  {console.log("Step 3 : in render_products ")}
-      <h2 className="text-3xl font-extrabold tracking-tight text-gray-600 category-title">Products ({ProductsCategory.length})</h2>
-
-      <div className="m-6 p-3 mt-10 ml-0 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-6 xl:gap-x-10" style={{ maxHeight: '800px', overflowY: 'scroll' }}>
-        {/* Loop Products */}
-        {ProductsCategory.map((product, index) => (
-          <div key={index} className="group relative shadow-lg" >
-            <div className=" min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-60 lg:aspect-none">
-              <img
-                alt = "player"
-                src= {product.image}
-                className="w-full h-full object-center object-cover lg:w-full lg:h-full"
-              />
-            </div>
-            <div className="flex justify-between p-3">
-              <div>
-                <h3 className="text-sm text-gray-700">
-                  <a href={product.href}>
-                    <span aria-hidden="true" className="absolute inset-0" />
-                    <span style={{ fontSize: '16px', fontWeight: '600' }}>{product.title}</span>
-                  </a>
-                  <p>Tag - {product.category}</p>
-                </h3>
-                <p className="mt-1 text-sm text-gray-500">Rating: {product.rating.rate}</p>
+        <div
+          className="m-6 p-3 mt-10 ml-0 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-6 xl:gap-x-10"
+          style={{ maxHeight: "800px", overflowY: "scroll" }}
+        >
+          {ProductsCategory.map((product, index) => (
+            <div key={index} className="group relative shadow-lg">
+              <div className=" min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-60 lg:aspect-none">
+                <img
+                  alt="player"
+                  src={product.image}
+                  className="w-full h-full object-center object-cover lg:w-full lg:h-full"
+                />
               </div>
-              <p className="text-sm font-medium text-green-600">${product.price}</p>
+              <div className="flex justify-between p-3">
+                <div>
+                  <h3 className="text-sm text-gray-700">
+                    <a href={product.href}>
+                      <span aria-hidden="true" className="absolute inset-0" />
+                      <span style={{ fontSize: "16px", fontWeight: "600" }}>
+                        {product.title}
+                      </span>
+                    </a>
+                    <p>Tag - {product.category}</p>
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-500">
+                    Rating: {product.rating.rate}
+                  </p>
+                </div>
+                <p className="text-sm font-medium text-green-600">
+                  ${product.price}
+                </p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
-  }
+    );
+  };
 
-  
-  function handleClick(tag){
+  useEffect(() => {
+    console.log("Step 1: After reading file :");
+  }, []);
+
+  function handleClick(tag) {
     console.log("Step 4 : in handleClick", tag);
-    let filtered = Products.filter(cat => cat.category === tag);
-    if(tag === "All"){
+    let filtered = Products.filter((cat) => cat.category === tag);
+    if (tag === "All") {
       setProductsCategory(Products);
-    }
-    else{
+    } else {
       setProductsCategory(filtered);
-    // ProductsCategory = filtered;
-    console.log("Step 5 : ", Products.length, ProductsCategory.length);
+      console.log("Step 5 : ", Products.length, ProductsCategory.length);
     }
   }
 
-  
   const handleChange = (e) => {
     setQuery(e.target.value);
-    const results = Products.filter(eachProduct => {
+    const results = Products.filter((eachProduct) => {
       if (e.target.value === "") return true;
-      return eachProduct.title.toLowerCase().includes(e.target.value.toLowerCase());
+      return eachProduct.title
+        .toLowerCase()
+        .includes(e.target.value.toLowerCase());
     });
     setProductsCategory(results);
   };

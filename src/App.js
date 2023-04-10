@@ -12,6 +12,7 @@ export const App = () => {
   // var ProductsCategory = Products;
   const [cart, setCart] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
+  const [count, setCounter] = useState(0);
 
   const render_products = (ProductsCategory) => {
     return (
@@ -55,10 +56,25 @@ export const App = () => {
                 </p>
               </div>
               <div className="flex justify-between p-3">
-              <button type="button" onClick={() => addToCart(product.title)}>+</button>
-              <button type="button" onClick={() => removeFromCart(product.title)}>-</button>
+                <button
+                  className="bg-green-500 text-white rounded-l py-1 px-2"
+                  style={{zIndex:10}}
+                  onClick={() => addToCart(product)}
+                >
+                  +
+                </button>
+                <span className="border border-green-500 bg-white py-1 px-2" style={{zIndex:10}}>
+                  {count}
+                </span>
+                <button
+                  className="bg-red-500 text-white rounded-r py-1 px-2"
+                  style={{zIndex:10}}
+                  onClick={() => removeFromCart(product)}
+                >
+                  -
+                </button>
+              </div>
             </div>
-          </div>
           ))}
         </div>
       </div>
@@ -91,14 +107,16 @@ export const App = () => {
   const addToCart = (el) => {
     setCart([...cart, el]);
     setCartTotal(cartTotal + el.price);
+    setCounter(count+1);
     console.log("Added to cart!");
   };
-  
+
   const removeFromCart = (el) => {
     let hardCopy = [...cart];
     hardCopy = hardCopy.filter((cartItem) => cartItem.id !== el.id);
     setCart(hardCopy);
     setCartTotal(cartTotal - el.price);
+    setCounter(count-1);
   };
 
   return (

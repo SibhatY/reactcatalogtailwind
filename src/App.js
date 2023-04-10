@@ -1,6 +1,6 @@
 import "./App.css";
 import logo from "./logo.png";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Products } from "./Products";
 import { Categories } from "./Categories";
 
@@ -12,7 +12,6 @@ export const App = () => {
   // var ProductsCategory = Products;
   const [cart, setCart] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
-  const [count, setCounter] = useState(0);
 
   const render_products = (ProductsCategory) => {
     return (
@@ -58,17 +57,20 @@ export const App = () => {
               <div className="flex justify-between p-3">
                 <button
                   className="bg-green-500 text-white rounded-l py-1 px-2"
-                  style={{zIndex:10}}
+                  style={{ zIndex: 10 }}
                   onClick={() => addToCart(product)}
                 >
                   +
                 </button>
-                <span className="border border-green-500 bg-white py-1 px-2" style={{zIndex:10}}>
-                  {count}
+                <span
+                  className="border border-green-500 bg-white py-1 px-2"
+                  style={{ zIndex: 10 }}
+                >
+                  {howManyofThis(product.id)}
                 </span>
                 <button
                   className="bg-red-500 text-white rounded-r py-1 px-2"
-                  style={{zIndex:10}}
+                  style={{ zIndex: 10 }}
                   onClick={() => removeFromCart(product)}
                 >
                   -
@@ -77,6 +79,7 @@ export const App = () => {
             </div>
           ))}
         </div>
+        <span style={{ position: 'absolute', right: 100}}>{cartTotal}</span>
       </div>
     );
   };
@@ -106,18 +109,40 @@ export const App = () => {
 
   const addToCart = (el) => {
     setCart([...cart, el]);
-    setCartTotal(cartTotal + el.price);
-    setCounter(count+1);
-    console.log("Added to cart!");
   };
 
   const removeFromCart = (el) => {
-    let hardCopy = [...cart];
-    hardCopy = hardCopy.filter((cartItem) => cartItem.id !== el.id);
-    setCart(hardCopy);
-    setCartTotal(cartTotal - el.price);
-    setCounter(count-1);
+    const index = cart.findIndex((item) => item.id === el.id);
+    if (index !== -1) {
+      const hardCopy = [...cart];
+      hardCopy.splice(index, 1);
+      setCart(hardCopy);
+    }
   };
+
+  function howManyofThis(id) {
+    let hmot = cart.filter((cartItem) => cartItem.id === id);
+    return hmot.length;
+  }
+
+  useEffect(() => {
+    total();
+  }, [cart]);
+
+  const total = () => {
+    let totalVal = 0;
+    for (let i = 0; i < cart.length; i++) {
+      totalVal += cart[i].price;
+    }
+    setCartTotal(totalVal);
+  };
+
+  const cartItems = cart.map((el) => (
+    <div key={el.id}>
+      <img class="img-fluid" src={el.image} width={30} />
+      {el.title}${el.price}
+    </div>
+  ));
 
   return (
     <div className="flex fixed flex-row">
@@ -161,7 +186,7 @@ export const App = () => {
           Products.length,
           ProductsCategory.length
         )}
-        {render_products(ProductsCategory)}
+        {render_products(ProductsCategory)}<br></br>
       </div>
     </div>
   );

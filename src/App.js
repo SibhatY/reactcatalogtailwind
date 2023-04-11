@@ -13,6 +13,18 @@ export const App = () => {
   const [cart, setCart] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
 
+  const checkoutButton = () => {
+    if (cart.length > 0) {
+      return (
+        <button className="bg-blue-500 text-white rounded-md px-3 py-2 mt-3">
+          Checkout
+        </button>
+      );
+    } else {
+      return null;
+    }
+  };
+
   const render_products = (ProductsCategory) => {
     return (
       <div className="category-section fixed">
@@ -79,7 +91,7 @@ export const App = () => {
             </div>
           ))}
         </div>
-        <span style={{ position: 'absolute', right: 100}}>{cartTotal}</span>
+        <span style={{ position: 'absolute', right: 100}}>{checkoutButton()}{cartTotal}</span>
       </div>
     );
   };
@@ -186,7 +198,7 @@ export const App = () => {
           Products.length,
           ProductsCategory.length
         )}
-        {render_products(ProductsCategory)}<br></br>
+        {render_products(ProductsCategory)}
       </div>
     </div>
   );

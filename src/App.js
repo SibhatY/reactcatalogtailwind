@@ -1,13 +1,14 @@
 import "./App.css";
 import logo from "./logo.png";
 import React, { useState, useEffect } from "react";
-import { Products } from "./Products";
+// import { Products } from "./Products";
+import data from './last.json';
 import { Categories } from "./Categories";
 
 export const App = () => {
   console.log("Step 1: After reading file :");
 
-  const [ProductsCategory, setProductsCategory] = useState(Products);
+  const [ProductsCategory, setProductsCategory] = useState(data);
   const [query, setQuery] = useState("");
   const [showCheckout, setShowCheckout] = useState(false);
   // var ProductsCategory = Products;
@@ -218,6 +219,7 @@ const renderCart = () => {
                   alt="player"
                   src={product.image}
                   className="w-full h-full object-center object-cover lg:w-full lg:h-full"
+                  {...console.log(product.image)}
                 />
               </div>
               <div className="flex justify-between p-3">
@@ -231,9 +233,9 @@ const renderCart = () => {
                     </a>
                     <p>Tag - {product.category}</p>
                   </h3>
-                  <p className="mt-1 text-sm text-gray-500">
+                  {/* <p className="mt-1 text-sm text-gray-500">
                     Rating: {product.rating.rate}
-                  </p>
+                  </p> */}
                 </div>
                 <p className="text-sm font-medium text-green-600">
                   ${product.price}
@@ -271,19 +273,19 @@ const renderCart = () => {
 
   function handleClick(tag) {
     console.log("Step 4 : in handleClick", tag);
-    let filtered = Products.filter((cat) => cat.category === tag);
+    let filtered = data.filter((cat) => cat.category === tag);
     if (tag === "All") {
-      setProductsCategory(Products);
+      setProductsCategory(data);
     } else {
       setProductsCategory(filtered);
       // ProductsCategory = filtered;
-      console.log("Step 5 : ", Products.length, ProductsCategory.length);
+      console.log("Step 5 : ", data.length, ProductsCategory.length);
     }
   }
 
   const handleChange = (e) => {
     setQuery(e.target.value);
-    const results = Products.filter((eachProduct) => {
+    const results = data.filter((eachProduct) => {
       if (e.target.value === "") return true;
       return eachProduct.title
         .toLowerCase()
@@ -333,7 +335,7 @@ const renderCart = () => {
     <div className="flex fixed flex-row">
       {console.log(
         "Step 2 : Return App :",
-        Products.length,
+        data.length,
         ProductsCategory.length
       )}
       <div
@@ -368,7 +370,7 @@ const renderCart = () => {
       <div className="ml-5  p-10 xl:basis-4/5">
         {console.log(
           "Before render :",
-          Products.length,
+          data.length,
           ProductsCategory.length
         )}
         {/* {render_products(ProductsCategory)} */}

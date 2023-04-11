@@ -42,7 +42,7 @@ export const App = () => {
             <thead>
               <tr className="font-bold">
                 <th className="p-2">Product Name</th>
-                <th className="p-2">Quantity</th>
+                <th className="p-2">Image</th>
                 <th className="p-2">Price</th>
               </tr>
             </thead>
@@ -335,7 +335,7 @@ export const App = () => {
         <tbody>
           <tr className="border-b">
             <td className="p-2">{el.title}</td>
-            <td className="p-2">1</td>
+            <td className="p-2"><img class="img-fluid" src={el.image} width={100} /></td>
             <td className="p-2">{el.price}</td>
           </tr>
         </tbody>

@@ -9,6 +9,7 @@ export const App = () => {
 
   const [ProductsCategory, setProductsCategory] = useState(Products);
   const [query, setQuery] = useState("");
+  const [showCheckout, setShowCheckout] = useState(false);
   // var ProductsCategory = Products;
   const [cart, setCart] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
@@ -16,14 +17,28 @@ export const App = () => {
   const checkoutButton = () => {
     if (cart.length > 0) {
       return (
-        <button className="bg-blue-500 text-white rounded-md px-3 py-2 mt-3">
-          Checkout
+        <button onClick={handleShowCheckout} className="bg-blue-500 text-white rounded-md px-3 py-2 mt-3">
+          {showCheckout ? 'Return to Shop' : 'Checkout'} you
         </button>
       );
     } else {
       return null;
     }
   };
+
+  function handleShowCheckout() {
+
+    setShowCheckout(!showCheckout);
+}
+
+const renderCart = () => {
+  return (
+    <div className="category-section fixed">
+      {cartItems}
+      <span style={{ position: 'absolute', right: 100}}>{checkoutButton()}{cartTotal}</span>
+    </div>
+  );
+};
 
   const render_products = (ProductsCategory) => {
     return (
@@ -198,7 +213,8 @@ export const App = () => {
           Products.length,
           ProductsCategory.length
         )}
-        {render_products(ProductsCategory)}
+        {/* {render_products(ProductsCategory)} */}
+        {showCheckout ? renderCart() : render_products(ProductsCategory)}
       </div>
     </div>
   );

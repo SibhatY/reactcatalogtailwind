@@ -36,7 +36,8 @@ export const App = () => {
 
   const renderCart = () => {
     return (
-      <div className="category-section fixed">
+      <div style={{ maxHeight: "100vh", overflowY: "auto"}}>
+      <div className="fixed overflow-hidden " style={{ maxHeight: "100vh", overflowY: "auto"}}>
         <div className="bg-white p-4 rounded shadow-lg">
           <table className="w-full text-center">
             <thead>
@@ -50,159 +51,155 @@ export const App = () => {
           </table>
         </div>
         <tr>
-            <td className="font-bold p-2" colSpan="3">
-              Total:
-            </td>
-            <td className="font-bold p-2">{cartTotal}</td>
-          </tr>
-        <span style={{ position: "absolute", right: 0 }}>
+          <td className="font-bold p-2" colSpan="3">
+            Total:
+          </td>
+          <td className="font-bold p-2">{cartTotal}</td>
+        </tr>
+        <span style={{ position: "absolute", right: 0, zIndex: 100}}>
           {checkoutButton()}
         </span>
+        {render_form()}
+       
+      </div>
       </div>
     );
   };
 
-  // const renderForm = () => {
-  //   return (
 
-  //     <div className="category-section fixed" style={{float: "left"}}>
+  const render_form = () => {
+    return (
+      <div className="flex justify-center items-center h-screen" style={{ maxHeight: "100vh", overflowY: "auto"}}>
+        <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+          <h1 style={{textAlign: "center"}}><strong>Payment Information</strong></h1>
+      <form className="w-full max-w-sm mx-auto mt-8">
+        <div className="md:flex md:items-center mb-6">
+          <div className="md:w-1/3">
+            <label
+              className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+              htmlFor="full-name"
+            >
+              Full Name
+            </label>
+          </div>
+          <div className="md:w-2/3">
+            <input
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              id="full-name"
+              type="text"
+              placeholder="John Doe"
+              required
+            />
+          </div>
+        </div>
+        <div className="md:flex md:items-center mb-6">
+          <div className="md:w-1/3">
+            <label
+              className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+              htmlFor="email"
+            >
+              Email
+            </label>
+          </div>
+          <div className="md:w-2/3">
+            <input
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              id="email"
+              type="email"
+              placeholder="johndoe@example.com"
+              required
+            />
+          </div>
+        </div>
+        <div className="md:flex md:items-center mb-6">
+          <div className="md:w-1/3">
+            <label
+              className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+              htmlFor="card"
+            >
+              Card Number
+            </label>
+          </div>
+          <div className="md:w-2/3">
+            <input
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              id="card"
+              type="text"
+              placeholder="0000 0000 0000 0000"
+              required
+            />
+          </div>
+        </div>
+        <div className="md:flex md:items-center mb-6">
+          <div className="md:w-1/3">
+            <label
+              className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+              htmlFor="address"
+            >
+              Address
+            </label>
+          </div>
+          <div className="md:w-2/3">
+            <input
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              id="address"
+              type="text"
+              placeholder="123 Main St"
+              required
+            />
+          </div>
+        </div>
 
-  // <head>
+        <div className="md:flex md:items-center mb-6">
+          <div className="md:w-1/3">
+            <label
+              className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+              htmlFor="city"
+            >
+              City
+            </label>
+          </div>
+          <div className="md:w-2/3">
+            <input
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              id="city"
+              type="text"
+              placeholder="New York City"
+              required
+            />
+          </div>
+        </div>
 
-  //   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
-  //     integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossOrigin="anonymous"></link>
-  //   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-  //     integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
-  //     crossOrigin="anonymous"></script>
-  //   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"></link>
-
-  // </head>
-
-  // <body>
-
-  // <div className="container">
-
-  // <div className="row">
-  //   <div className="col-2"></div>
-
-  //   <div className="col-8">
-
-  //     <h1>Javascript Form Validation</h1>
-
-  //     <div id="liveAlertPlaceholder"></div>
-
-  //     <form className="row g-3" id="checkout-form">
-
-  //       <div className="col-md-6">
-  //         <label htmlFor="inputName" className="form-label">Full Name</label>
-  //         <input type="text" className="form-control" id="inputName"></input>
-  //         <div className="valid-feedback">
-  //           Looks good!
-  //         </div>
-  //         <div className="invalid-feedback">
-  //           Must be like, "John Doe"
-  //         </div>
-  //       </div>
-
-  //       <div className="col-md-6">
-  //         <label htmlFor="inputEmail4" className="form-label">Email</label>
-  //         <input type="email" className="form-control" id="inputEmail4"></input>
-  //         <div className="valid-feedback">
-  //           Looks good!
-  //         </div>
-  //         <div className="invalid-feedback">
-  //           Must be like, "abc@xyz.efg"
-  //         </div>
-  //       </div>
-
-  //       <div className="col-12">
-  //         <label htmlFor="inputCard" className="form-label">Card</label>
-  //         <div className="input-group mb-3">
-  //           <span className="input-group-text" id="basic-addon1"><i className="bi-credit-card-fill"></i></span>
-  //           <input type="text" id="inputCard" className="form-control" placeholder="XXXX-XXXX-XXXX-XXXX"
-  //             aria-label="Username" aria-describedby="basic-addon1"></input>
-  //           <div className="valid-feedback">
-  //             Looks good!
-  //           </div>
-  //           <div className="invalid-feedback">
-  //             Must be like, "7777-7777-7777-7777"
-  //           </div>
-  //         </div>
-  //       </div>
-
-  //       <div className="col-12">
-  //         <label htmlFor="inputAddress" className="form-label">Address</label>
-  //         <input type="text" className="form-control" id="inputAddress" placeholder="1234 Main St"></input>
-  //       </div>
-  //       <div className="col-12">
-  //         <label htmlFor="inputAddress2" className="form-label">Address 2</label>
-  //         <input type="text" className="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor"></input>
-  //       </div>
-  //       <div className="col-md-6">
-  //         <label htmlFor="inputCity" className="form-label">City</label>
-  //         <input type="text" className="form-control" id="inputCity"></input>
-  //       </div>
-  //       <div className="col-md-4">
-  //         <label htmlFor="inputState" className="form-label">State</label>
-  //         <select id="inputState" className="form-select">
-  //           <option selected>Choose...</option>
-  //         </select>
-  //       </div>
-  //       <div className="col-md-2">
-  //         <label htmlFor="inputZip" className="form-label">Zip</label>
-  //         <input type="text" className="form-control" id="inputZip"></input>
-  //       </div>
-  //       <div className="col-12">
-  //         <div className="form-check">
-  //           <input className="form-check-input" type="checkbox" id="gridCheck"></input>
-  //           <label className="form-check-label" for="gridCheck">
-  //             Check me out
-  //           </label>
-  //         </div>
-  //       </div>
-  //       <div className="col-12">
-  //         <button type="submit" className="btn btn-success"> <i className="bi-bag-check"></i> Order</button>
-  //       </div>
-  //     </form>
-
-  //     <div className="card collapse" style={{width: "18rem"}}>
-  //       <div className="card-body">
-  //         <h5 className="card-title">Order summary</h5>
-  //         <p className="card-text">Here is a summary of your order.</p>
-  //       </div>
-  //       <ul className="list-group list-group-flush">
-
-  //       </ul>
-  //       <a href="" onClick="location.reload()" className="btn btn-secondary"> <i className="bi-arrow-left-circle"></i>
-  //         Return</a>
-  //     </div>
-
-  //     <footer className="bd-footer py-4 py-md-5 mt-5 bg-light">
-  //       <div className="container py-4 py-md-5 px-4 px-md-3">
-  //         <div className="row">
-  //           <div className="col-lg-12 mb-3">
-  //             <b>SE/Com-S 319</b> Javascript form validation.
-  //           </div>
-
-  //         </div>
-  //       </div>
-  //     </footer>
-
-  //   </div>
-
-  //   <div className="col-2"></div>
-
-  // </div>
-
-  // </div>
-
-  // <script type="text/javascript" src="validationForm.js"></script>
-
-  // </body>
-
-  //     </div>
-  //   );
-  // };
+        <div className="md:flex md:items-center mb-6">
+          <div className="md:w-1/3">
+            <label
+              className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+              htmlFor="zip"
+            >
+              ZIP
+            </label>
+          </div>
+          <div className="md:w-2/3">
+            <input
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              id="zip"
+              type="text"
+              placeholder="12345"
+              required
+            />
+          </div>
+        </div>
+        <button
+          type="submit"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+        >
+          Submit
+        </button>
+      </form>
+      </div>
+      </div>
+    );
+  };
 
   const render_products = (ProductsCategory) => {
     return (
@@ -332,17 +329,19 @@ export const App = () => {
   };
 
   const cartItems = cart.map((el) => (
-        <tbody>
-          <tr className="border-b">
-            <td className="p-2">{el.title}</td>
-            <td className="p-2"><img class="img-fluid" src={el.image} width={100} /></td>
-            <td className="p-2">{el.price}</td>
-          </tr>
-        </tbody>
+    <tbody>
+      <tr className="border-b">
+        <td className="p-2">{el.title}</td>
+        <td className="p-2">
+          <img class="img-fluid" src={el.image} width={100} />
+        </td>
+        <td className="p-2">{el.price}</td>
+      </tr>
+    </tbody>
   ));
 
   return (
-    <div className="flex fixed flex-row">
+    <div className="flex fixed flex-row" style={{ maxHeight: "100vh", overflowY: "auto"}}>
       {console.log(
         "Step 2 : Return App :",
         data.length,
@@ -377,7 +376,7 @@ export const App = () => {
           </div>
         </div>
       </div>
-      <div className="ml-5  p-10 xl:basis-4/5">
+      <div className="ml-5  p-10 xl:basis-4/5" style={{ maxHeight: "100vh", overflowY: "auto"}}>
         {console.log("Before render :", data.length, ProductsCategory.length)}
         {/* {render_products(ProductsCategory)} */}
         {/* Add renderForm() to test */}

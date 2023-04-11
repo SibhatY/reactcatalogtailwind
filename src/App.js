@@ -2,7 +2,7 @@ import "./App.css";
 import logo from "./logo.png";
 import React, { useState, useEffect } from "react";
 // import { Products } from "./Products";
-import data from './last.json';
+import data from "./last.json";
 import { Categories } from "./Categories";
 
 export const App = () => {
@@ -18,8 +18,11 @@ export const App = () => {
   const checkoutButton = () => {
     if (cart.length > 0) {
       return (
-        <button onClick={handleShowCheckout} className="bg-blue-500 text-white rounded-md px-3 py-2 mt-3">
-          {showCheckout ? 'Return' : 'Checkout'}
+        <button
+          onClick={handleShowCheckout}
+          className="bg-blue-500 text-white rounded-md px-3 py-2 mt-3"
+        >
+          {showCheckout ? "Return" : "Checkout"}
         </button>
       );
     } else {
@@ -28,176 +31,178 @@ export const App = () => {
   };
 
   function handleShowCheckout() {
-
     setShowCheckout(!showCheckout);
-}
+  }
 
-const renderCart = () => {
-  
-  return (
-    <div className="category-section fixed">
-      {cartItems}
-      <span style={{ position: 'absolute', right: 0}}>{checkoutButton()}{cartTotal}</span>
-    </div>
-  );
-};
+  const renderCart = () => {
+    return (
+      <div className="category-section fixed">
+        <div className="bg-white p-4 rounded shadow-lg">
+          <table className="w-full text-center">
+            <thead>
+              <tr className="font-bold">
+                <th className="p-2">Product Name</th>
+                <th className="p-2">Quantity</th>
+                <th className="p-2">Price</th>
+              </tr>
+            </thead>
+            {cartItems}
+          </table>
+        </div>
+        <tr>
+            <td className="font-bold p-2" colSpan="3">
+              Total:
+            </td>
+            <td className="font-bold p-2">{cartTotal}</td>
+          </tr>
+        <span style={{ position: "absolute", right: 0 }}>
+          {checkoutButton()}
+        </span>
+      </div>
+    );
+  };
 
+  // const renderForm = () => {
+  //   return (
 
+  //     <div className="category-section fixed" style={{float: "left"}}>
 
+  // <head>
 
+  //   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+  //     integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossOrigin="anonymous"></link>
+  //   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+  //     integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+  //     crossOrigin="anonymous"></script>
+  //   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"></link>
 
-// const renderForm = () => {
-//   return (
+  // </head>
 
-//     <div className="category-section fixed" style={{float: "left"}}>
-     
+  // <body>
 
-// <head>
+  // <div className="container">
 
-//   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
-//     integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossOrigin="anonymous"></link>
-//   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-//     integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
-//     crossOrigin="anonymous"></script>
-//   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"></link>
+  // <div className="row">
+  //   <div className="col-2"></div>
 
-// </head>
+  //   <div className="col-8">
 
-// <body>
+  //     <h1>Javascript Form Validation</h1>
 
-// <div className="container">
+  //     <div id="liveAlertPlaceholder"></div>
 
-// <div className="row">
-//   <div className="col-2"></div>
+  //     <form className="row g-3" id="checkout-form">
 
+  //       <div className="col-md-6">
+  //         <label htmlFor="inputName" className="form-label">Full Name</label>
+  //         <input type="text" className="form-control" id="inputName"></input>
+  //         <div className="valid-feedback">
+  //           Looks good!
+  //         </div>
+  //         <div className="invalid-feedback">
+  //           Must be like, "John Doe"
+  //         </div>
+  //       </div>
 
-//   <div className="col-8">
+  //       <div className="col-md-6">
+  //         <label htmlFor="inputEmail4" className="form-label">Email</label>
+  //         <input type="email" className="form-control" id="inputEmail4"></input>
+  //         <div className="valid-feedback">
+  //           Looks good!
+  //         </div>
+  //         <div className="invalid-feedback">
+  //           Must be like, "abc@xyz.efg"
+  //         </div>
+  //       </div>
 
-//     <h1>Javascript Form Validation</h1>
+  //       <div className="col-12">
+  //         <label htmlFor="inputCard" className="form-label">Card</label>
+  //         <div className="input-group mb-3">
+  //           <span className="input-group-text" id="basic-addon1"><i className="bi-credit-card-fill"></i></span>
+  //           <input type="text" id="inputCard" className="form-control" placeholder="XXXX-XXXX-XXXX-XXXX"
+  //             aria-label="Username" aria-describedby="basic-addon1"></input>
+  //           <div className="valid-feedback">
+  //             Looks good!
+  //           </div>
+  //           <div className="invalid-feedback">
+  //             Must be like, "7777-7777-7777-7777"
+  //           </div>
+  //         </div>
+  //       </div>
 
-//     <div id="liveAlertPlaceholder"></div>
+  //       <div className="col-12">
+  //         <label htmlFor="inputAddress" className="form-label">Address</label>
+  //         <input type="text" className="form-control" id="inputAddress" placeholder="1234 Main St"></input>
+  //       </div>
+  //       <div className="col-12">
+  //         <label htmlFor="inputAddress2" className="form-label">Address 2</label>
+  //         <input type="text" className="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor"></input>
+  //       </div>
+  //       <div className="col-md-6">
+  //         <label htmlFor="inputCity" className="form-label">City</label>
+  //         <input type="text" className="form-control" id="inputCity"></input>
+  //       </div>
+  //       <div className="col-md-4">
+  //         <label htmlFor="inputState" className="form-label">State</label>
+  //         <select id="inputState" className="form-select">
+  //           <option selected>Choose...</option>
+  //         </select>
+  //       </div>
+  //       <div className="col-md-2">
+  //         <label htmlFor="inputZip" className="form-label">Zip</label>
+  //         <input type="text" className="form-control" id="inputZip"></input>
+  //       </div>
+  //       <div className="col-12">
+  //         <div className="form-check">
+  //           <input className="form-check-input" type="checkbox" id="gridCheck"></input>
+  //           <label className="form-check-label" for="gridCheck">
+  //             Check me out
+  //           </label>
+  //         </div>
+  //       </div>
+  //       <div className="col-12">
+  //         <button type="submit" className="btn btn-success"> <i className="bi-bag-check"></i> Order</button>
+  //       </div>
+  //     </form>
 
-//     <form className="row g-3" id="checkout-form">
+  //     <div className="card collapse" style={{width: "18rem"}}>
+  //       <div className="card-body">
+  //         <h5 className="card-title">Order summary</h5>
+  //         <p className="card-text">Here is a summary of your order.</p>
+  //       </div>
+  //       <ul className="list-group list-group-flush">
 
-     
-//       <div className="col-md-6">
-//         <label htmlFor="inputName" className="form-label">Full Name</label>
-//         <input type="text" className="form-control" id="inputName"></input>
-//         <div className="valid-feedback">
-//           Looks good!
-//         </div>
-//         <div className="invalid-feedback">
-//           Must be like, "John Doe"
-//         </div>
-//       </div>
+  //       </ul>
+  //       <a href="" onClick="location.reload()" className="btn btn-secondary"> <i className="bi-arrow-left-circle"></i>
+  //         Return</a>
+  //     </div>
 
-      
-//       <div className="col-md-6">
-//         <label htmlFor="inputEmail4" className="form-label">Email</label>
-//         <input type="email" className="form-control" id="inputEmail4"></input>
-//         <div className="valid-feedback">
-//           Looks good!
-//         </div>
-//         <div className="invalid-feedback">
-//           Must be like, "abc@xyz.efg"
-//         </div>
-//       </div>
+  //     <footer className="bd-footer py-4 py-md-5 mt-5 bg-light">
+  //       <div className="container py-4 py-md-5 px-4 px-md-3">
+  //         <div className="row">
+  //           <div className="col-lg-12 mb-3">
+  //             <b>SE/Com-S 319</b> Javascript form validation.
+  //           </div>
 
-      
-//       <div className="col-12">
-//         <label htmlFor="inputCard" className="form-label">Card</label>
-//         <div className="input-group mb-3">
-//           <span className="input-group-text" id="basic-addon1"><i className="bi-credit-card-fill"></i></span>
-//           <input type="text" id="inputCard" className="form-control" placeholder="XXXX-XXXX-XXXX-XXXX"
-//             aria-label="Username" aria-describedby="basic-addon1"></input>
-//           <div className="valid-feedback">
-//             Looks good!
-//           </div>
-//           <div className="invalid-feedback">
-//             Must be like, "7777-7777-7777-7777"
-//           </div>
-//         </div>
-//       </div>
+  //         </div>
+  //       </div>
+  //     </footer>
 
-//       <div className="col-12">
-//         <label htmlFor="inputAddress" className="form-label">Address</label>
-//         <input type="text" className="form-control" id="inputAddress" placeholder="1234 Main St"></input>
-//       </div>
-//       <div className="col-12">
-//         <label htmlFor="inputAddress2" className="form-label">Address 2</label>
-//         <input type="text" className="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor"></input>
-//       </div>
-//       <div className="col-md-6">
-//         <label htmlFor="inputCity" className="form-label">City</label>
-//         <input type="text" className="form-control" id="inputCity"></input>
-//       </div>
-//       <div className="col-md-4">
-//         <label htmlFor="inputState" className="form-label">State</label>
-//         <select id="inputState" className="form-select">
-//           <option selected>Choose...</option>
-//         </select>
-//       </div>
-//       <div className="col-md-2">
-//         <label htmlFor="inputZip" className="form-label">Zip</label>
-//         <input type="text" className="form-control" id="inputZip"></input>
-//       </div>
-//       <div className="col-12">
-//         <div className="form-check">
-//           <input className="form-check-input" type="checkbox" id="gridCheck"></input>
-//           <label className="form-check-label" for="gridCheck">
-//             Check me out
-//           </label>
-//         </div>
-//       </div>
-//       <div className="col-12">
-//         <button type="submit" className="btn btn-success"> <i className="bi-bag-check"></i> Order</button>
-//       </div>
-//     </form>
+  //   </div>
 
+  //   <div className="col-2"></div>
 
-//     <div className="card collapse" style={{width: "18rem"}}>
-//       <div className="card-body">
-//         <h5 className="card-title">Order summary</h5>
-//         <p className="card-text">Here is a summary of your order.</p>
-//       </div>
-//       <ul className="list-group list-group-flush">
+  // </div>
 
-//       </ul>
-//       <a href="" onClick="location.reload()" className="btn btn-secondary"> <i className="bi-arrow-left-circle"></i>
-//         Return</a>
-//     </div>
+  // </div>
 
+  // <script type="text/javascript" src="validationForm.js"></script>
 
-//     <footer className="bd-footer py-4 py-md-5 mt-5 bg-light">
-//       <div className="container py-4 py-md-5 px-4 px-md-3">
-//         <div className="row">
-//           <div className="col-lg-12 mb-3">
-//             <b>SE/Com-S 319</b> Javascript form validation.
-//           </div>
+  // </body>
 
-//         </div>
-//       </div>
-//     </footer>
-
-//   </div>
-
-//   <div className="col-2"></div>
-
-
-// </div>
-
-// </div>
-
-// <script type="text/javascript" src="validationForm.js"></script>
-
-// </body>
-
-
-//     </div>
-//   );
-// };
-
-
+  //     </div>
+  //   );
+  // };
 
   const render_products = (ProductsCategory) => {
     return (
@@ -266,7 +271,9 @@ const renderCart = () => {
             </div>
           ))}
         </div>
-        <span style={{ position: 'absolute', right: 100}}>{checkoutButton()}{cartTotal}</span>
+        <span style={{ position: "absolute", right: 100 }}>
+          {checkoutButton()}
+        </span>
       </div>
     );
   };
@@ -325,10 +332,13 @@ const renderCart = () => {
   };
 
   const cartItems = cart.map((el) => (
-    <div key={el.id}>
-      <img class="img-fluid" src={el.image} width={30} />
-      {el.title}${el.price}
-    </div>
+        <tbody>
+          <tr className="border-b">
+            <td className="p-2">{el.title}</td>
+            <td className="p-2">1</td>
+            <td className="p-2">{el.price}</td>
+          </tr>
+        </tbody>
   ));
 
   return (
@@ -368,24 +378,11 @@ const renderCart = () => {
         </div>
       </div>
       <div className="ml-5  p-10 xl:basis-4/5">
-        {console.log(
-          "Before render :",
-          data.length,
-          ProductsCategory.length
-        )}
+        {console.log("Before render :", data.length, ProductsCategory.length)}
         {/* {render_products(ProductsCategory)} */}
         {/* Add renderForm() to test */}
-        {showCheckout ? renderCart(): render_products(ProductsCategory)}
+        {showCheckout ? renderCart() : render_products(ProductsCategory)}
       </div>
-      
     </div>
   );
-
-
-
-  
-
-
-
-
 }; //end App

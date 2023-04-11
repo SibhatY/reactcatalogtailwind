@@ -12,6 +12,7 @@ export const App = () => {
   // var ProductsCategory = Products;
   const [cart, setCart] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
+  const [showCart, toggleCart] = useState(false);
 
   const render_products = (ProductsCategory) => {
     return (
@@ -79,10 +80,28 @@ export const App = () => {
             </div>
           ))}
         </div>
-        <span style={{ position: 'absolute', right: 100}}>{cartTotal}</span>
+        <span style={{ position: 'absolute', right: 100 }}>{cartTotal}</span>
+
+        <button className="bg-blue-500 text-white rounded-l rounded-r py-1 px-2"
+        onClick={handleShowCart}
+          style={{ zIndex: 10 }}>
+
+          Checkout
+
+        </button>
       </div>
     );
   };
+
+
+  function handleShowCart() {
+
+    
+    toggleCart(!showCart);
+  }
+ 
+
+
 
   function handleClick(tag) {
     console.log("Step 4 : in handleClick", tag);
@@ -177,6 +196,8 @@ export const App = () => {
           </div>
           <div className="py-10">
             <input type="search" value={query} onChange={handleChange} />
+
+
           </div>
         </div>
       </div>
@@ -188,6 +209,7 @@ export const App = () => {
         )}
         {render_products(ProductsCategory)}<br></br>
       </div>
+
     </div>
   );
 }; //end App

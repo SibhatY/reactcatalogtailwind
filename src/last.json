@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "title": "LeBron James",
+    "price": 109.95,
+    "description": "He is considered to be the Greatest Player of All Time by many. Collect his card today!",
+    "category": "Basketball",
+    "image": "./LeBronJames.webp"
+  },
+  {
+    "id": 2,
+    "title": "Luka Doncic",
+    "price": 22.3,
+    "description": "He is a young star player on the Mavs that will continue to dominate the NBA for awhile. Collect his card today!",
+    "category": "Basketball",
+    "image": "./luka.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Steph Curry",
+    "price": 55.99,
+    "description": "He is considered to be the one of the greatest shooters of all time in NBA history. Collect his card today!",
+    "category": "Basketball",
+    "image": "./Curry.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Jalen Hurts",
+    "price": 15.99,
+    "description": "Jalen Hurts is the starting quarterback for the Philadelphia Eagles and led them to Superbowl 57. Collect his card today!",
+    "category": "Football",
+    "image": "./jalenhurts.jpg"
+  },
+  {
+    "id": 5,
+    "title": "Patrick Mahomes",
+    "price": 695,
+    "description": "Patrick Mahomes is the starting quarterback for the Kansas City Chiefs and led his team to a Superbowl 57 victory. Collect his card today!",
+    "category": "Football",
+    "image": "./patrickmahomes.jpg"
+  },
+  {
+    "id": 6,
+    "title": "Justin Jefferson",
+    "price": 168,
+    "description": "Justin Jefferson a starting wide reciever for the Minnesota Vikings. He is a young talent. Collect his card today!",
+    "category": "Football",
+    "image": "./justinjefferson.jpg"
+  }
+]

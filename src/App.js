@@ -2,7 +2,7 @@ import "./App.css";
 import logo from "./logo.png";
 import React, { useState, useEffect } from "react";
 // import { Products } from "./Products";
-import data from "./data.json";
+import data from './productData.json';
 import { Categories } from "./Categories";
 
 export const App = () => {
@@ -41,7 +41,7 @@ const renderCart = () => {
   );
 };
 
-  const render_products = (data) => {
+  const render_products = () => {
     return (
       <div className="category-section fixed">
         {console.log("Step 3 : in render_products ")}
@@ -59,7 +59,7 @@ const renderCart = () => {
               <div className=" min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden lg:h-60 lg:aspect-none">
                 <img
                   alt="player"
-                  src={product.image}
+                  src = {product.location}
                   className="w-full h-full object-center object-cover lg:w-full lg:h-full"
                 />
               </div>
@@ -164,10 +164,11 @@ const renderCart = () => {
     }
     setCartTotal(totalVal);
   };
+  
 
   const cartItems = cart.map((el) => (
     <div key={el.productId}>
-      <img class="img-fluid" src={el.image} width={30} />
+      <img class="img-fluid" src={el.location} width={30} />
       {el.playerName}${el.price}
     </div>
   ));
@@ -215,7 +216,7 @@ const renderCart = () => {
           ProductsCategory.length
         )}
         {/* {render_products(ProductsCategory)} */}
-        {showCheckout ? renderCart() : render_products(data)}
+        {showCheckout ? renderCart() : render_products()}
       </div>
     </div>
   );

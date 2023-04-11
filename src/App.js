@@ -18,7 +18,7 @@ export const App = () => {
     if (cart.length > 0) {
       return (
         <button onClick={handleShowCheckout} className="bg-blue-500 text-white rounded-md px-3 py-2 mt-3">
-          {showCheckout ? 'Return to Shop' : 'Checkout'} you
+          {showCheckout ? 'Return' : 'Checkout'}
         </button>
       );
     } else {

@@ -1,13 +1,14 @@
 import "./App.css";
 import logo from "./logo.png";
 import React, { useState, useEffect } from "react";
-import { Products } from "./Products";
+// import { Products } from "./Products";
+import data from "./data.json";
 import { Categories } from "./Categories";
 
 export const App = () => {
   console.log("Step 1: After reading file :");
 
-  const [ProductsCategory, setProductsCategory] = useState(Products);
+  const [ProductsCategory, setProductsCategory] = useState(data);
   const [query, setQuery] = useState("");
   const [showCheckout, setShowCheckout] = useState(false);
   // var ProductsCategory = Products;
@@ -40,12 +41,12 @@ const renderCart = () => {
   );
 };
 
-  const render_products = (ProductsCategory) => {
+  const render_products = (data) => {
     return (
       <div className="category-section fixed">
         {console.log("Step 3 : in render_products ")}
         <h2 className="text-3xl font-extrabold tracking-tight text-gray-600 category-title">
-          Products ({ProductsCategory.length})
+          Products ({data.length})
         </h2>
 
         <div
@@ -53,8 +54,8 @@ const renderCart = () => {
           style={{ maxHeight: "800px", overflowY: "scroll" }}
         >
           {/* Loop Products */}
-          {ProductsCategory.map((product, index) => (
-            <div key={index} className="group relative shadow-lg">
+          {data.map((product) => (
+            <div key={product.productId} className="group relative shadow-lg">
               <div className=" min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden lg:h-60 lg:aspect-none">
                 <img
                   alt="player"
@@ -68,14 +69,14 @@ const renderCart = () => {
                     <a href={product.href}>
                       <span aria-hidden="true" className="absolute inset-0" />
                       <span style={{ fontSize: "16px", fontWeight: "600" }}>
-                        {product.title}
+                        {product.playerName}
                       </span>
                     </a>
-                    <p>Tag - {product.category}</p>
+                    <p>Tag - {product.productName}</p>
                   </h3>
-                  <p className="mt-1 text-sm text-gray-500">
+                  {/* <p className="mt-1 text-sm text-gray-500">
                     Rating: {product.rating.rate}
-                  </p>
+                  </p> */}
                 </div>
                 <p className="text-sm font-medium text-green-600">
                   ${product.price}
@@ -93,7 +94,7 @@ const renderCart = () => {
                   className="border border-green-500 bg-white py-1 px-2"
                   style={{ zIndex: 10 }}
                 >
-                  {howManyofThis(product.id)}
+                  {howManyofThis(product.productId)}
                 </span>
                 <button
                   className="bg-red-500 text-white rounded-r py-1 px-2"
@@ -113,21 +114,21 @@ const renderCart = () => {
 
   function handleClick(tag) {
     console.log("Step 4 : in handleClick", tag);
-    let filtered = Products.filter((cat) => cat.category === tag);
+    let filtered = data.filter((cat) => cat.productName === tag);
     if (tag === "All") {
-      setProductsCategory(Products);
+      setProductsCategory(data);
     } else {
       setProductsCategory(filtered);
       // ProductsCategory = filtered;
-      console.log("Step 5 : ", Products.length, ProductsCategory.length);
+      console.log("Step 5 : ", data.length, ProductsCategory.length);
     }
   }
 
   const handleChange = (e) => {
     setQuery(e.target.value);
-    const results = Products.filter((eachProduct) => {
+    const results = data.filter((eachProduct) => {
       if (e.target.value === "") return true;
-      return eachProduct.title
+      return eachProduct.playerName
         .toLowerCase()
         .includes(e.target.value.toLowerCase());
     });
@@ -139,7 +140,7 @@ const renderCart = () => {
   };
 
   const removeFromCart = (el) => {
-    const index = cart.findIndex((item) => item.id === el.id);
+    const index = cart.findIndex((item) => item.productId === el.productId);
     if (index !== -1) {
       const hardCopy = [...cart];
       hardCopy.splice(index, 1);
@@ -148,7 +149,7 @@ const renderCart = () => {
   };
 
   function howManyofThis(id) {
-    let hmot = cart.filter((cartItem) => cartItem.id === id);
+    let hmot = cart.filter((cartItem) => cartItem.productId === id);
     return hmot.length;
   }
 
@@ -165,9 +166,9 @@ const renderCart = () => {
   };
 
   const cartItems = cart.map((el) => (
-    <div key={el.id}>
+    <div key={el.productId}>
       <img class="img-fluid" src={el.image} width={30} />
-      {el.title}${el.price}
+      {el.playerName}${el.price}
     </div>
   ));
 
@@ -175,7 +176,7 @@ const renderCart = () => {
     <div className="flex fixed flex-row">
       {console.log(
         "Step 2 : Return App :",
-        Products.length,
+        data.length,
         ProductsCategory.length
       )}
       <div
@@ -210,11 +211,11 @@ const renderCart = () => {
       <div className="ml-5  p-10 xl:basis-4/5">
         {console.log(
           "Before render :",
-          Products.length,
+          data.length,
           ProductsCategory.length
         )}
         {/* {render_products(ProductsCategory)} */}
-        {showCheckout ? renderCart() : render_products(ProductsCategory)}
+        {showCheckout ? renderCart() : render_products(data)}
       </div>
     </div>
   );

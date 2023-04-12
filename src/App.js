@@ -12,6 +12,7 @@ export const App = () => {
   const [ProductsCategory, setProductsCategory] = useState(data);
   const [query, setQuery] = useState("");
   const [showCheckout, setShowCheckout] = useState(false);
+  const [showEnd, setShowEnd] = useState(false);
   // var ProductsCategory = Products;
   const [cart, setCart] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
@@ -31,9 +32,43 @@ export const App = () => {
     }
   };
 
+  const endpageButton = () => {
+    if (showEnd === true) {
+      return (
+        <button
+          onClick={handleShowEndPage}
+          className="bg-blue-500 text-white rounded-md px-3 py-2 mt-3"
+        >
+          Return
+        </button>
+      );
+    } else {
+      return null;
+    }
+  };
+
   function handleShowCheckout() {
     setShowCheckout(!showCheckout);
   }
+
+  function handleShowEndPage(){
+    setShowEnd(false);
+    handleShowCheckout();
+    setCart([]);
+
+  }
+
+  const render_endpage = () => {
+    return(
+      <div>
+        <p>Done with the order!</p>
+        <p>Thank you {formData.fullName}</p>
+        <p>You ordered do the cart mappy thingy</p>
+        <p>Shipped to {formData.address}, {formData.city}, {formData.state}, {formData.zip}</p>
+        {endpageButton()}
+      </div>
+    );
+  };
 
   const [formData, setFormData] = useState({
     fullName: '',
@@ -47,15 +82,13 @@ export const App = () => {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // TODO: Submit the form data to the server
+    setShowEnd(true);
     console.log(formData);
   };
 
@@ -64,9 +97,11 @@ export const App = () => {
     const subtotal = cart.reduce((acc, curr) => acc + curr.price, 0);
     const taxAmount = subtotal * taxRate;
     const total = subtotal + taxAmount;
+
+    if(showEnd === false){
   
     return (
-      <div className="category-section fixed">
+      <div className="category-section fixed" style={{ maxHeight: "100vh", overflowY: "auto", maxWidth: "100vw"}}>
         <div
           className="bg-white p-4 rounded shadow-lg"
           style={{ maxHeight: "400px", overflow: "auto" }}
@@ -103,9 +138,14 @@ export const App = () => {
         {render_form()}
       </div>
     );
+    }else{
+      return (
+        <div>
+        {render_endpage()}
+        </div>
+      )
+    }
   };
-  
-
   
 
   const render_form = () => {
@@ -113,7 +153,7 @@ export const App = () => {
       <div className="flex justify-center items-center h-screen" style={{ maxHeight: "100vh", overflowY: "auto"}}>
         <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <h1 style={{textAlign: "center"}}><strong>Payment Information</strong></h1>
-      <form className="w-full max-w-sm mx-auto mt-8">
+      <form className="w-full max-w-sm mx-auto mt-8" onSubmit={handleSubmit}>
         <div className="md:flex md:items-center mb-6">
           <div className="md:w-1/3">
             <label
@@ -150,7 +190,6 @@ export const App = () => {
               id="email"
               type="email"
               placeholder="johndoe@example.com"
-              value={formData.email}
             onChange={handleInputChange}
               required
             />
@@ -171,10 +210,9 @@ export const App = () => {
               id="card"
               type="text"
               placeholder="0000 0000 0000 0000"
-              value={formData.cardNumber}
             onChange={handleInputChange}
             required
-            pattern="\d{16}"
+            // pattern="\d{16}"
               
             />
           </div>
@@ -194,7 +232,6 @@ export const App = () => {
               id="address"
               type="text"
               placeholder="123 Main St"
-              value={formData.address}
             onChange={handleInputChange}
               required
             />
@@ -216,7 +253,6 @@ export const App = () => {
               id="city"
               type="text"
               placeholder="New York City"
-              value={formData.city}
             onChange={handleInputChange}
               required
             />
@@ -238,7 +274,6 @@ export const App = () => {
               id="state"
               type="text"
               placeholder="New York"
-              value={formData.state}
             onChange={handleInputChange}
               required
             />
@@ -260,7 +295,6 @@ export const App = () => {
               id="zip"
               type="text"
               placeholder="12345"
-              value={formData.zip}
             onChange={handleInputChange}
             required
             pattern="\d{5}"

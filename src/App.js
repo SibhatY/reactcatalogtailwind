@@ -92,6 +92,73 @@ export const App = () => {
     console.log(formData);
   };
 
+
+
+
+//Old render cart just incase new one has issues
+
+  // const renderCart = () => {
+  //   const taxRate = 0.06; // 6% tax rate
+  //   const subtotal = cart.reduce((acc, curr) => acc + curr.price, 0);
+  //   const taxAmount = subtotal * taxRate;
+  //   const total = subtotal + taxAmount;
+
+  //   if(showEnd === false){
+  
+  //   return (
+  //     <div className="category-section fixed" style={{ maxHeight: "100vh", overflowY: "auto", maxWidth: "100vw"}}>
+  //       <div
+  //         className="bg-white p-4 rounded shadow-lg"
+  //         style={{ maxHeight: "400px", overflow: "auto" }}
+  //       >
+  //         <table className="w-full text-center">
+  //           <thead>
+  //             <tr className="font-bold">
+  //               <th className="p-2">Product Name</th>
+  //               <th className="p-2">Image</th>
+  //               <th className="p-2">Price</th>
+  //             </tr>
+  //           </thead>
+  //           {cartItems}
+  //         </table>
+  //       </div>
+  //       <div className="bg-white p-4 rounded shadow-lg mt-4">
+  //         <div className="flex justify-between mb-2">
+  //           <div className="font-bold">Subtotal:</div>
+  //           <div className="font-bold">{`$${subtotal.toFixed(2)}`}</div>
+  //         </div>
+  //         <div className="flex justify-between mb-2">
+  //           <div className="font-bold">Tax ({taxRate * 100}%):</div>
+  //           <div className="font-bold">{`$${taxAmount.toFixed(2)}`}</div>
+  //         </div>
+  //         <hr className="my-2" />
+  //         <div className="flex justify-between">
+  //           <div className="font-bold">Total:</div>
+  //           <div className="font-bold">{`$${total.toFixed(2)}`}</div>
+  //         </div>
+  //       </div>
+  //       <span style={{ position: "absolute", right: 0, zIndex: 10 }}>
+  //         {checkoutButton()}
+  //       </span>
+  //       {render_form()}
+  //     </div>
+  //   );
+  //   }else{
+  //     return (
+  //       <div>
+  //       {render_endpage()}
+  //       </div>
+  //     )
+  //   }
+  // };
+
+
+
+
+
+
+
+  
   const renderCart = () => {
     const taxRate = 0.06; // 6% tax rate
     const cartItems = Array.from(new Set(cart.map((item) => item.id))).map(

@@ -85,7 +85,7 @@ export const App = () => {
         {render_form()}
        
       </div>
-      </div>
+      
     );
   };
 

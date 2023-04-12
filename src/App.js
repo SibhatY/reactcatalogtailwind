@@ -34,6 +34,30 @@ export const App = () => {
     setShowCheckout(!showCheckout);
   }
 
+  const [formData, setFormData] = useState({
+    fullName: '',
+    email: '',
+    cardNumber: '',
+    address: '',
+    city: '',
+    state: '',
+    zip: ''
+  });
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // TODO: Submit the form data to the server
+    console.log(formData);
+  };
+
   const renderCart = () => {
     return (
       <div style={{ maxHeight: "100vh", overflowY: "auto"}}>
@@ -88,6 +112,8 @@ export const App = () => {
               id="full-name"
               type="text"
               placeholder="John Doe"
+              value={formData.fullName}
+            onChange={handleInputChange}
               required
             />
           </div>
@@ -107,6 +133,8 @@ export const App = () => {
               id="email"
               type="email"
               placeholder="johndoe@example.com"
+              value={formData.email}
+            onChange={handleInputChange}
               required
             />
           </div>
@@ -126,7 +154,11 @@ export const App = () => {
               id="card"
               type="text"
               placeholder="0000 0000 0000 0000"
-              required
+              value={formData.cardNumber}
+            onChange={handleInputChange}
+            required
+            pattern="\d{16}"
+              
             />
           </div>
         </div>
@@ -145,6 +177,8 @@ export const App = () => {
               id="address"
               type="text"
               placeholder="123 Main St"
+              value={formData.address}
+            onChange={handleInputChange}
               required
             />
           </div>
@@ -165,6 +199,30 @@ export const App = () => {
               id="city"
               type="text"
               placeholder="New York City"
+              value={formData.city}
+            onChange={handleInputChange}
+              required
+            />
+          </div>
+        </div>
+
+        <div className="md:flex md:items-center mb-6">
+          <div className="md:w-1/3">
+            <label
+              className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+              htmlFor="state"
+            >
+              State
+            </label>
+          </div>
+          <div className="md:w-2/3">
+            <input
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              id="state"
+              type="text"
+              placeholder="New York"
+              value={formData.state}
+            onChange={handleInputChange}
               required
             />
           </div>
@@ -185,7 +243,11 @@ export const App = () => {
               id="zip"
               type="text"
               placeholder="12345"
-              required
+              value={formData.zip}
+            onChange={handleInputChange}
+            required
+            pattern="\d{5}"
+              
             />
           </div>
         </div>

@@ -15,7 +15,7 @@ export const App = () => {
   const [showEnd, setShowEnd] = useState(false);
   // var ProductsCategory = Products;
   const [cart, setCart] = useState([]);
-  const [cartTotal, setCartTotal] = useState(0);
+  // const [cartTotal, setCartTotal] = useState(0);
 
   const checkoutButton = () => {
     if (cart.length > 0) {
@@ -59,16 +59,36 @@ export const App = () => {
   }
 
   const render_endpage = () => {
-    return(
-      <div>
-        <p>Done with the order!</p>
-        <p>Thank you {formData.fullName}</p>
-        <p>You ordered do the cart mappy thingy</p>
-        <p>Shipped to {formData.address}, {formData.city}, {formData.state}, {formData.zip}</p>
-        {endpageButton()}
-      </div>
+    const taxRate = 0.06; // 6% tax rate
+    const cartItems = Array.from(new Set(cart.map((item) => item.id))).map(
+      (id) => {
+        const count = cart.filter((item) => item.id === id).length;
+        const product = data.find((item) => item.id === id);
+        return (
+          <tr key={product.id} className="border-b">
+            <td className="p-2">{`${product.title} (${count})`}</td>
+            <td className="p-2">
+              <img src={product.image} alt={product.name} width="50" />
+            </td>
+            <td className="p-2">{`$${product.price.toFixed(2)}`}</td>
+          </tr>
+        );
+      }
     );
-  };
+    const subtotal = cart.reduce((acc, curr) => acc + curr.price, 0);
+    const taxAmount = subtotal * taxRate;
+    const total = subtotal + taxAmount;
+  return (
+    <div className="flex flex-col items-center justify-center mt-16">
+      <p className="text-3xl font-bold mb-4">Done with the order!</p>
+      <p className="text-lg mb-2">Thank you {formData.fullName}!</p>
+      <p className="text-lg mb-2">You ordered these items: <strong>{cartItems}</strong> for a total of {`$${total.toFixed(2)}`}</p>
+      <p className="text-lg mb-2">Shipped to {formData.address}, {formData.city}, {formData.state}, {formData.zip}</p>
+      <p className="text-lg mb-4">You will recieve your package in 3 business days!</p>
+      {endpageButton()}
+    </div>
+  );
+};
 
   const [formData, setFormData] = useState({
     fullName: '',
@@ -79,11 +99,6 @@ export const App = () => {
     state: '',
     zip: ''
   });
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
-  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -117,14 +132,8 @@ export const App = () => {
   
     if (showEnd === false) {
       return (
-        <div
-          className="category-section fixed"
-          style={{ maxHeight: "100vh", overflowY: "auto", maxWidth: "100vw" }}
-        >
-          <div
-            className="bg-white p-4 rounded shadow-lg"
-            style={{ maxHeight: "400px", overflow: "auto" }}
-          >
+        <div className="category-section fixed max-h-screen overflow-y-auto max-w-full">
+          <div className="bg-white p-4 rounded shadow-lg max-h-400 overflow-auto">
             <table className="w-full text-center">
               <thead>
                 <tr className="font-bold">
@@ -151,18 +160,12 @@ export const App = () => {
               <div className="font-bold">{`$${total.toFixed(2)}`}</div>
             </div>
           </div>
-          <span style={{ position: "absolute", right: 0, zIndex: 10 }}>
-            {checkoutButton()}
-          </span>
+          <span className="absolute right-0 z-10">{checkoutButton()}</span>
           {render_form()}
         </div>
       );
     } else {
-      return (
-        <div>
-          {render_endpage()}
-        </div>
-      );
+      return <div>{render_endpage()}</div>;
     }
   };
   
@@ -188,8 +191,9 @@ export const App = () => {
               id="full-name"
               type="text"
               placeholder="John Doe"
-              value={formData.fullName}
-            onChange={handleInputChange}
+              onChange={(event) =>
+                setFormData({ ...formData, fullName: event.target.value })
+              }
               required
             />
           </div>
@@ -209,7 +213,9 @@ export const App = () => {
               id="email"
               type="email"
               placeholder="johndoe@example.com"
-            onChange={handleInputChange}
+              onChange={(event) =>
+                setFormData({ ...formData, email: event.target.value })
+              }
               required
             />
           </div>
@@ -229,10 +235,11 @@ export const App = () => {
               id="card"
               type="text"
               placeholder="0000 0000 0000 0000"
-            onChange={handleInputChange}
+              onChange={(event) =>
+                setFormData({ ...formData, card: event.target.value })
+              }
             required
-            // pattern="\d{16}"
-              
+            pattern= "[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}"
             />
           </div>
         </div>
@@ -251,7 +258,9 @@ export const App = () => {
               id="address"
               type="text"
               placeholder="123 Main St"
-            onChange={handleInputChange}
+              onChange={(event) =>
+                setFormData({ ...formData, address: event.target.value })
+              }
               required
             />
           </div>
@@ -272,7 +281,9 @@ export const App = () => {
               id="city"
               type="text"
               placeholder="New York City"
-            onChange={handleInputChange}
+              onChange={(event) =>
+                setFormData({ ...formData, city: event.target.value })
+              }
               required
             />
           </div>
@@ -293,7 +304,9 @@ export const App = () => {
               id="state"
               type="text"
               placeholder="New York"
-            onChange={handleInputChange}
+              onChange={(event) =>
+                setFormData({ ...formData, state: event.target.value })
+              }
               required
             />
           </div>
@@ -314,7 +327,9 @@ export const App = () => {
               id="zip"
               type="text"
               placeholder="12345"
-            onChange={handleInputChange}
+              onChange={(event) =>
+                setFormData({ ...formData, zip: event.target.value })
+              }
             required
             pattern="\d{5}"
               
@@ -394,16 +409,13 @@ export const App = () => {
   // };
 
 
-
-
   const render_products = (ProductsCategory) => {
     return (
       <div className="category-section fixed">
-        {console.log("Step 3 : in render_products ")}
         <h2 className="text-3xl font-extrabold tracking-tight text-gray-600 category-title">
           Products ({ProductsCategory.length})
         </h2>
-
+  
         <div
           className="m-6 p-3 mt-10 ml-0 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-6 xl:gap-x-10"
           style={{ maxHeight: "800px", overflowY: "scroll" }}
@@ -411,7 +423,7 @@ export const App = () => {
           {/* Loop Products */}
           {ProductsCategory.map((product, index) => (
             <div key={index} className="group relative shadow-lg">
-              <div className=" min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden lg:h-60 lg:aspect-none">
+              <div className="min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden lg:h-60 lg:aspect-none">
                 <img
                   alt="player"
                   src={product.image}
@@ -424,15 +436,11 @@ export const App = () => {
                   <h3 className="text-sm text-gray-700">
                     <a href={product.href}>
                       <span aria-hidden="true" className="absolute inset-0" />
-                      <span style={{ fontSize: "16px", fontWeight: "600" }}>
+                      <span className="text-lg font-medium text-green-600">
                         {product.title}
                       </span>
                     </a>
-                    <p>Tag - {product.category}</p>
                   </h3>
-                  {/* <p className="mt-1 text-sm text-gray-500">
-                    Rating: {product.rating.rate}
-                  </p> */}
                 </div>
                 <p className="text-sm font-medium text-green-600">
                   ${product.price}
@@ -447,7 +455,7 @@ export const App = () => {
                   +
                 </button>
                 <span
-                  className="border border-green-500 bg-white py-1 px-2"
+                  className="border border-green-500 bg-white py-1 px-2 text-lg font-medium"
                   style={{ zIndex: 10 }}
                 >
                   {howManyofThis(product.id)}
@@ -511,17 +519,17 @@ export const App = () => {
     return hmot.length;
   }
 
-  useEffect(() => {
-    total();
-  }, [cart]);
+  // useEffect(() => {
+  //   total();
+  // }, [cart]);
 
-  const total = () => {
-    let totalVal = 0;
-    for (let i = 0; i < cart.length; i++) {
-      totalVal += cart[i].price;
-    }
-    setCartTotal(totalVal);
-  };
+  // const total = () => {
+  //   let totalVal = 0;
+  //   for (let i = 0; i < cart.length; i++) {
+  //     totalVal += cart[i].price;
+  //   }
+  //   setCartTotal(totalVal);
+  // };
 
   const cartItems = cart.map((el) => (
     <tbody>
@@ -567,7 +575,7 @@ export const App = () => {
             ))}
           </div>
           <div className="py-10">
-            <input type="search" value={query} onChange={handleChange} />
+            <input type="search" value={query} onChange={handleChange} className="w-full px-4 py-2 border-gray-400 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:ring-opacity-50" placeholder="Search products" />
           </div>
         </div>
       </div>

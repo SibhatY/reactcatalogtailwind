@@ -60,9 +60,8 @@ export const App = () => {
 
   const renderCart = () => {
     return (
-      <div style={{ maxHeight: "100vh", overflowY: "auto"}}>
-      <div className="fixed overflow-hidden " style={{ maxHeight: "100vh", overflowY: "auto"}}>
-        <div className="bg-white p-4 rounded shadow-lg">
+      <div className="category-section fixed">
+        <div className="bg-white p-4 rounded shadow-lg" style={{ maxHeight: "400px", overflow: "auto" }}>
           <table className="w-full text-center">
             <thead>
               <tr className="font-bold">

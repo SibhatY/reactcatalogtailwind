@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 // import { Products } from "./Products";
 import data from "./last.json";
 import { Categories } from "./Categories";
+import { isCursorAtEnd } from "@testing-library/user-event/dist/utils";
 
 export const App = () => {
   console.log("Step 1: After reading file :");
@@ -59,9 +60,17 @@ export const App = () => {
   };
 
   const renderCart = () => {
+    const taxRate = 0.06; // 6% tax rate
+    const subtotal = cart.reduce((acc, curr) => acc + curr.price, 0);
+    const taxAmount = subtotal * taxRate;
+    const total = subtotal + taxAmount;
+  
     return (
       <div className="category-section fixed">
-        <div className="bg-white p-4 rounded shadow-lg" style={{ maxHeight: "400px", overflow: "auto" }}>
+        <div
+          className="bg-white p-4 rounded shadow-lg"
+          style={{ maxHeight: "400px", overflow: "auto" }}
+        >
           <table className="w-full text-center">
             <thead>
               <tr className="font-bold">
@@ -73,22 +82,30 @@ export const App = () => {
             {cartItems}
           </table>
         </div>
-        <tr>
-          <td className="font-bold p-2" colSpan="3">
-            Total:
-          </td>
-          <td className="font-bold p-2">{cartTotal}</td>
-        </tr>
-        <span style={{ position: "absolute", right: 0, zIndex: 100}}>
+        <div className="bg-white p-4 rounded shadow-lg mt-4">
+          <div className="flex justify-between mb-2">
+            <div className="font-bold">Subtotal:</div>
+            <div className="font-bold">{`$${subtotal.toFixed(2)}`}</div>
+          </div>
+          <div className="flex justify-between mb-2">
+            <div className="font-bold">Tax ({taxRate * 100}%):</div>
+            <div className="font-bold">{`$${taxAmount.toFixed(2)}`}</div>
+          </div>
+          <hr className="my-2" />
+          <div className="flex justify-between">
+            <div className="font-bold">Total:</div>
+            <div className="font-bold">{`$${total.toFixed(2)}`}</div>
+          </div>
+        </div>
+        <span style={{ position: "absolute", right: 0, zIndex: 100 }}>
           {checkoutButton()}
         </span>
         {render_form()}
-       
       </div>
-      
     );
   };
-
+  
+{/* <span style={{ position: "absolute", right: 0, zIndex: 100}}></span> */}
 
   const render_form = () => {
     return (

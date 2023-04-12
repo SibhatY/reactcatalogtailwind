@@ -97,7 +97,7 @@ export const App = () => {
             <div className="font-bold">{`$${total.toFixed(2)}`}</div>
           </div>
         </div>
-        <span style={{ position: "absolute", right: 0, zIndex: 100 }}>
+        <span style={{ position: "absolute", right: 0, zIndex: 10 }}>
           {checkoutButton()}
         </span>
         {render_form()}
@@ -105,7 +105,8 @@ export const App = () => {
     );
   };
   
-{/* <span style={{ position: "absolute", right: 0, zIndex: 100}}></span> */}
+
+  
 
   const render_form = () => {
     return (
